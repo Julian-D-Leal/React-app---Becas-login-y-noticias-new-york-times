@@ -1,12 +1,12 @@
 /** @format */
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Card from "react-bootstrap/Card";
 import React, { Component } from "react";
-import Modal from "../modalDetalle/Detalles";
+import ModalC from "../modalDetalle/Detalles";
 import axios from "axios";
 import "./card.css";
 import Populares from "../carrusel/Populares";
 import Noticias from "../nyt/Noticias";
+import { Button} from "reactstrap";
 
 class ListBecas extends Component {
   constructor(props) {
@@ -23,30 +23,33 @@ class ListBecas extends Component {
       },
       becas: [],
       viewInternationals: 1,
-      pop: [],
+      pop: []
     };
   }
   componentDidMount() {
     this.refreshList();
   }
-  
+
 
   detallarItem = (item) => {
     this.setState({ activeItem: item, modal: !this.state.modal });
     this.popularidad(item);
   };
 
+
   popularidad = async (item) => {
     //función para aumentar + 1 la vistas de la beca que es detallada
     item.vistas += 1;
     this.setState({ activeItem: item });
-    await axios.put(
-      "https://restframeworkbecasandlogin.herokuapp.com/becas/list/" +
-        item.id +
-        "/",
-      item
-    ).then()
-    .catch(err => console.log(err));
+    await axios
+      .put(
+        "https://restframeworkbecasandlogin.herokuapp.com/becas/list/" +
+          item.id +
+          "/",
+        item
+      )
+      .then()
+      .catch((err) => console.log(err));
   };
 
   refreshList = async () => {
@@ -68,12 +71,14 @@ class ListBecas extends Component {
     }
     return this.setState({ viewInternationals: 1 });
   };
+  
 
   render = () => {
     const { viewInternationals } = this.state;
     const items = this.state.becas.filter(
       (item) => item.categoria === viewInternationals
     );
+
     return (
       <div className='container'>
         <div className='text-center'>
@@ -85,29 +90,31 @@ class ListBecas extends Component {
               onClick={() => this.displayInternationals(false)}
               className='btn btn-primary'
             >
-              NATIONAL SCOLARSHIPS
+              NATIONAL SCHOLARSHIPS
             </button>
             <button
               onClick={() => this.displayInternationals(true)}
               className='btn btn-primary'
             >
-              INTERNATIONAL SCOLARSHIPS
+              INTERNATIONAL SCHOLARSHIPS
             </button>
           </div>
         </div>
         {items.map((item) => (
-          <Card className="text-center mt-3 mb-3" key={item.id}>
+          <Card className='text-center mt-3 mb-3' key={item.id}>
             <Card.Header>SCOLARSHIP</Card.Header>
             <Card.Body>
               <Card.Title>{item.nombre}</Card.Title>
               <Card.Text>University: {item.universidad}</Card.Text>
-              <Button className='mt-4' onClick={() => this.detallarItem(item)}>Details</Button>
+              <Button className='mt-4' onClick={() => this.detallarItem(item)}>
+                Details
+              </Button>
             </Card.Body>
             <Card.Footer>{item.pais}</Card.Footer>
           </Card>
         ))}
         {this.state.modal && (
-          <Modal activeItem={this.state.activeItem} toggle={this.toggle} />
+          <ModalC activeItem={this.state.activeItem} toggle={this.toggle} />
         )}
       </div>
     );

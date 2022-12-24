@@ -14,11 +14,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-# Admin action
+## Admin actions
 
 if you wannna use the crud of scholarships, login with chris:1234
 
-### npm modules
+## npm modules
 
 npm i axios reactstrap react-bootstrap bootstrap \
 npm redux react-router-dom@6.3.0 react-redux redux-thunk prop-types redux-devtools-extension

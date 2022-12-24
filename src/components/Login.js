@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import { ButtonGroup, Grid, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import { useDispatch } from "react-redux";
+import {Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { useEffect, useState } from "react";
 // import Alert from "react-bootstrap/Alert";
 // import { useState } from "react";
 
@@ -30,6 +32,8 @@ function Login() {
     },
   });
 
+  const [modal, setModal] = useState(true)
+  
   // const [error, setError] = useState(false);
 
   // const showError = () => {
@@ -38,6 +42,26 @@ function Login() {
   //     setError(false);
   //   }, 3000);
   //}
+
+  const toggleModal = () => {
+    setModal(!modal)
+  }
+  const renderModal = () => {
+    return (
+        <Modal isOpen={modal} toggle={toggleModal}>
+          <ModalHeader toggle={toggleModal}>Welcome</ModalHeader>
+          <ModalBody>
+            If you wanna use admin actions, login with user chris:1234
+          </ModalBody>
+          <ModalFooter>
+            <Button variant='secondary' onClick={toggleModal}>
+              Close
+            </Button>
+          </ModalFooter>
+        </Modal>
+    );
+  };
+
   return (
     <Container style={{ padding: 16, margin: "auto", maxWidth: 800 }}>
       {/* {error && <Alert variant="danger">Credenciales incorrectas</Alert>} */}
@@ -91,6 +115,7 @@ function Login() {
           </Grid>
         </Grid>
       </form>
+      {renderModal()}
     </Container>
   );
 }
