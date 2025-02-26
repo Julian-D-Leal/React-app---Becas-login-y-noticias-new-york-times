@@ -24,7 +24,7 @@ class Populares extends Component{
     }
     refreshList = async() => { await
         await axios
-        .get("https://restframeworkbecasandlogin.herokuapp.com/becas/list/")
+        .get("https://julian07.pythonanywhere.com/becas/list/")
         .then(res => this.setState({becas:res.data}))
         .catch(err => console.log(err))
     }
