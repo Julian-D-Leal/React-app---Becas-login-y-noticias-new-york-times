@@ -43,7 +43,7 @@ class ListBecas extends Component {
     this.setState({ activeItem: item });
     await axios
       .put(
-        "https://restframeworkbecasandlogin.herokuapp.com/becas/list/" +
+        "https://julian07.pythonanywhere.com/becas/list/" +
           item.id +
           "/",
         item
@@ -55,7 +55,7 @@ class ListBecas extends Component {
   refreshList = async () => {
     //función para traer todas las becas que existan en la BD
     await axios
-      .get("https://restframeworkbecasandlogin.herokuapp.com/becas/list/")
+      .get("https://julian07.pythonanywhere.com/becas/list/")
       .then((res) => this.setState({ becas: res.data }))
       .catch((err) => console.log(err));
   };
